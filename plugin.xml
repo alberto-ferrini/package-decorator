@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.decorators">
+      <decorator
+            adaptable="true"
+            class="it.extraweb.packagedecorator.decorator.PackageDecorator"
+            id="package-decorator.decorator"
+            label="Package Decorator"
+            lightweight="false"
+            location="REPLACE"
+            state="true">
+        <description>
+        	Displays a colored icon package, based on package name.
+        </description>
+         <enablement>
+           <objectClass
+                 name="org.eclipse.jdt.core.IJavaElement">
+           </objectClass>
+         </enablement>
+      </decorator>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            name="Package Decorator"
+            class="it.extraweb.packagedecorator.preference.PackageDecoratorPreferencePage"
+            id="it.extraweb.packagedecorator.preference.PackageDecoratorPreferencePage">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="it.extraweb.packagedecorator.preference.PreferenceInitializer">
+      </initializer>
+   </extension>
+
+</plugin>
