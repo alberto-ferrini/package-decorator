@@ -25,11 +25,9 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import it.extraweb.packagedecorator.activator.Activator;
 import it.extraweb.packagedecorator.dto.Preference;
 import it.extraweb.packagedecorator.dto.Preferences;
 import it.extraweb.packagedecorator.util.MaterialColorPalette;
-import it.extraweb.packagedecorator.util.PackageDecoratorConstants;
 import it.extraweb.packagedecorator.util.PackageDecoratorUtils;
 
 /**
@@ -51,7 +49,6 @@ extends PreferencePage
 implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 
 	private Preferences preferences;
-	private MaterialColorPalette palette;
 	private Text textPackage;
 
 	private Table table;
@@ -66,8 +63,7 @@ implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 
 	@Override
 	public void init(IWorkbench workbench) {
-		preferences=PackageDecoratorUtils.decodePreferences(Activator.getDefault().getPreferenceStore().getString(PackageDecoratorConstants.PREFERENCES_NAME));
-		palette=new MaterialColorPalette();
+		preferences=PreferenceManager.loadPreferences();
 	}
 
 	@Override
@@ -153,7 +149,7 @@ implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 		combo.setDisplayColumnIndex(0);
 		combo.addSelectionListener(this);
 
-		for(String colorName:palette.getMap().keySet()){
+		for(String colorName:MaterialColorPalette.getInstance().getMap().keySet()){
 			TableItem comboItem=new TableItem(combo.getTable(), SWT.NULL);
 			comboItem.setImage(0, new Image(parent.getDisplay(), PackageDecoratorUtils.generateColorizedPackage(colorName)));
 			String name=PackageDecoratorUtils.decodeColorName(colorName);
@@ -200,12 +196,12 @@ implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 	}
 
 	private void save() {
-		Activator.getDefault().getPreferenceStore().setValue(PackageDecoratorConstants.PREFERENCES_NAME,PackageDecoratorUtils.encodePreferences(preferences));
+		PreferenceManager.savePreferences(preferences);
 	}
 
 	@Override
 	protected void performDefaults() {
-		preferences=PackageDecoratorUtils.generateDefaultPreferences();
+		preferences=PreferenceManager.generateDefaultPreferences();
 		table.removeAll();
 		table.redraw();
 		insertData();
@@ -226,7 +222,7 @@ implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 		if(e.getSource()==table){
 			Preference preference=preferences.get(table.getSelectionIndex());
 			textPackage.setText(preference.getPackageName());
-			combo.select(palette.getIndexMap().get(preference.getColor()));
+			combo.select(MaterialColorPalette.getInstance().getIndexMap().get(preference.getColor()));
 			checkSub.setSelection(preference.getSubPackages());
 			checkEmpty.setSelection(preference.getEmptyPackages());
 			form.setVisible(true);
@@ -264,11 +260,11 @@ implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 		else if(e.getSource()==buttonAdd){
 			TableItem item=new TableItem(table, SWT.LEAD);
 			item.setText(0,"(new)");
-			item.setImage(1,new Image(table.getDisplay(),PackageDecoratorUtils.generateColorizedPackage(MaterialColorPalette.DEFAULT)));
-			item.setText(1,PackageDecoratorUtils.decodeColorName(MaterialColorPalette.DEFAULT));
+			item.setImage(1,new Image(table.getDisplay(),PackageDecoratorUtils.generateColorizedPackage(MaterialColorPalette.DEFAULT_COLOR)));
+			item.setText(1,PackageDecoratorUtils.decodeColorName(MaterialColorPalette.DEFAULT_COLOR));
 			item.setImage(2,new Image(table.getDisplay(), new ImageData(this.getClass().getResourceAsStream("/icons/enabled.png"))));
 			item.setImage(3,new Image(table.getDisplay(), new ImageData(this.getClass().getResourceAsStream("/icons/disabled.png"))));
-			preferences.add(new Preference("(new)", MaterialColorPalette.DEFAULT, true, false));
+			preferences.add(new Preference("(new)", MaterialColorPalette.DEFAULT_COLOR, true, false));
 		}
 		else if(e.getSource()==buttonRemove){
 			int index=table.getSelectionIndex();

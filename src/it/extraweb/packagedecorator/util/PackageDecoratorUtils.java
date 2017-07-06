@@ -1,27 +1,25 @@
 package it.extraweb.packagedecorator.util;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Base64;
-
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.RGB;
 
 import it.extraweb.packagedecorator.activator.Activator;
-import it.extraweb.packagedecorator.dto.Preference;
-import it.extraweb.packagedecorator.dto.Preferences;
 
 public class PackageDecoratorUtils {
-	private static MaterialColorPalette palette=new MaterialColorPalette();
-
-	public static ImageData colorize(ImageData image, RGB rgb){
+	public static ImageData colorize(ImageData image, String color){
+		return colorize(image, MaterialColorPalette.getInstance().getMap().get(color));
+	}
+	
+	private static ImageData colorize(ImageData image, RGB rgb){
 		ImageData toReturn=null;
 		toReturn=new ImageData(image.width, image.height, image.depth, image.palette);
 		toReturn.alphaData=image.alphaData;
+		if(rgb==null){
+			rgb=MaterialColorPalette.getInstance().getMap().get(MaterialColorPalette.DEFAULT_COLOR);
+			Activator.getDefault().getLog().log(new Status(IStatus.WARNING,Activator.PLUGIN_ID , "Color not supported ("+rgb.toString()+"): use default value."));
+		}
 		float[] baseHsb=rgb.getHSB();
 		for(int i=0;i<toReturn.width;i++){
 			for(int j=0;j<toReturn.height;j++){
@@ -49,45 +47,8 @@ public class PackageDecoratorUtils {
 		return new ImageData(PackageDecoratorUtils.class.getResourceAsStream("/icons/package_default_d.png"));
 	}
 
-	public static Preferences generateDefaultPreferences() {
-		Preferences toReturn=new Preferences();
-		toReturn.add(new Preference("business", "ORANGE_500", true, false));
-		return toReturn;
-	}
-
-	public static String encodePreferences(Preferences preferences){
-		String toReturn="";
-		try{
-			ByteArrayOutputStream baos=new ByteArrayOutputStream();
-			ObjectOutputStream oos=new ObjectOutputStream(baos);
-			oos.writeObject(preferences);
-			byte[] data=baos.toByteArray();
-			byte[] encoded=Base64.getEncoder().encode(data);
-			toReturn=new String(encoded,"UTF-8");
-		}catch(Exception e){
-			Activator.getDefault().getLog().log(new Status(IStatus.ERROR,Activator.PLUGIN_ID , e.getLocalizedMessage(),e));
-		}
-		return toReturn;
-	}
-
-	public static Preferences decodePreferences(String preferences){
-		Preferences toReturn=null;
-		try{
-			byte[] decoded=Base64.getDecoder().decode(preferences.getBytes("UTF-8"));
-			ByteArrayInputStream bais=new ByteArrayInputStream(decoded);
-			ObjectInputStream ois=new ObjectInputStream(bais);
-			toReturn=(Preferences)ois.readObject();
-		}catch(Exception e){
-			Activator.getDefault().getLog().log(new Status(IStatus.ERROR,Activator.PLUGIN_ID , e.getLocalizedMessage(),e));
-		}
-		return toReturn;
-	}
 	
 	public static ImageData generateColorizedPackage(String color){
-		return PackageDecoratorUtils.colorize(PackageDecoratorUtils.getPackageIcon(),palette.getMap().get(color));
-	}
-	
-	public static ImageData generateColorizedPackage(RGB color){
 		return PackageDecoratorUtils.colorize(PackageDecoratorUtils.getPackageIcon(),color);
 	}
 	

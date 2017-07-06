@@ -5,7 +5,6 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 import it.extraweb.packagedecorator.activator.Activator;
 import it.extraweb.packagedecorator.util.PackageDecoratorConstants;
-import it.extraweb.packagedecorator.util.PackageDecoratorUtils;
 
 /**
  * Class used to initialize default preference values.
@@ -19,7 +18,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 */
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		store.setDefault(PackageDecoratorConstants.PREFERENCES_NAME,PackageDecoratorUtils.encodePreferences(PackageDecoratorUtils.generateDefaultPreferences()));
+		store.setDefault(PackageDecoratorConstants.PREFERENCES_NAME,PreferenceManager.encodePreferences(PreferenceManager.generateDefaultPreferences()));
 	}
 
 }
