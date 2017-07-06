@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import org.eclipse.swt.graphics.RGB;
 
 public class MaterialColorPalette {
+	public static final String DEFAULT="RED_500";
+	
 	public static final RGB RED_500=PackageDecoratorUtils.hex2Rgb("F44336");
 	public static final RGB PINK_500=PackageDecoratorUtils.hex2Rgb("E91E63");
 	public static final RGB PURPLE_500=PackageDecoratorUtils.hex2Rgb("9C27B0");
@@ -26,6 +28,8 @@ public class MaterialColorPalette {
 	//public static final RGB BLUEGREY_500=PackageDecoratorUtils.hex2Rgb("607D8B");
 
 	private LinkedHashMap<String, RGB> map;
+	private LinkedHashMap<String, Integer> indexMap;
+	
 	
 	public MaterialColorPalette(){
 		map=new LinkedHashMap<>();
@@ -44,9 +48,25 @@ public class MaterialColorPalette {
 		map.put("YELLOW_500", YELLOW_500);
 		map.put("AMBER_500", AMBER_500);
 		map.put("ORANGE_500", ORANGE_500);
-		map.put("ORANGE_500", ORANGE_500);
-		map.put("ORANGE_500", ORANGE_500);
 		map.put("DEEPORANGE_500", DEEPORANGE_500);
+		
+		indexMap=new LinkedHashMap<>();
+		indexMap.put("RED_500", 0);
+		indexMap.put("PINK_500", 1);
+		indexMap.put("PURPLE_500", 2);
+		indexMap.put("DEEPPURPLE_500", 3);
+		indexMap.put("INDIGO_500", 4);
+		indexMap.put("BLUE_500", 5);
+		indexMap.put("LIGHTBLUE_500", 6);
+		indexMap.put("CYAN_500", 7);
+		indexMap.put("TEAL_500", 8);
+		indexMap.put("GREEN_500", 9);
+		indexMap.put("LIGHTGREEN_500", 10);
+		indexMap.put("LIME_500", 11);
+		indexMap.put("YELLOW_500", 12);
+		indexMap.put("AMBER_500", 13);
+		indexMap.put("ORANGE_500", 14);
+		indexMap.put("DEEPORANGE_500", 15);
 		//map.put("BROWN_500", BROWN_500);
 		//map.put("GREY_500", GREY_500);
 		//map.put("BLUEGREY_500", BLUEGREY_500);
@@ -55,5 +75,11 @@ public class MaterialColorPalette {
 	public LinkedHashMap<String, RGB> getMap() {
 		return map;
 	}
+
+	public LinkedHashMap<String, Integer> getIndexMap() {
+		return indexMap;
+	}
+	
+	
 	
 }
