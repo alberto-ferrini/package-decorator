@@ -1,22 +1,14 @@
 package it.extraweb.packagedecorator.util;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.RGB;
 
-import it.extraweb.packagedecorator.activator.Activator;
-
 public class PackageDecoratorUtils {
-	public static ImageData colorize(ImageData current, ImageData template , String color){
-		return colorize(current,template, MaterialColorPalette.getInstance().getMap().get(color));
+	public static ImageData colorize(ImageData current, ImageData template , String colorHex){
+		return colorize(current,template, PackageDecoratorUtils.hex2Rgb(colorHex));
 	}
 
 	private static ImageData colorize(ImageData current, ImageData template, RGB rgb){
-		if(rgb==null){
-			rgb=MaterialColorPalette.getInstance().getMap().get(MaterialColorPalette.DEFAULT_COLOR);
-			Activator.getDefault().getLog().log(new Status(IStatus.WARNING,Activator.PLUGIN_ID , "Color not supported ("+rgb.toString()+"): use default value."));
-		}
 		float[] baseHsb=rgb.getHSB();
 		for(int i=0;i<current.width;i++){
 			for(int j=0;j<current.height;j++){
@@ -57,21 +49,8 @@ public class PackageDecoratorUtils {
 		return new ImageData(PackageDecoratorUtils.class.getResourceAsStream("/icons/package_default_d.png"));
 	}
 
-
-	public static ImageData generateColorizedPackage(String color){
-		return PackageDecoratorUtils.colorize(PackageDecoratorUtils.getPackageIcon(),null,color);
+	public static ImageData generateColorizedPackage(String colorHex){
+		return PackageDecoratorUtils.colorize(PackageDecoratorUtils.getPackageIcon(),null,colorHex);
 	}
 
-	public static String decodeColorName(String colorName){
-		String toReturn=colorName;
-		toReturn=toReturn.replace('_', ' ');
-		toReturn=toReturn.substring(0,1).toUpperCase()+toReturn.substring(1).toLowerCase();
-		return toReturn;
-	}
-
-	public static String encodeColorName(String colorName){
-		String toReturn=colorName.toUpperCase();
-		toReturn=toReturn.replace(' ', '_');
-		return toReturn;
-	}
 }

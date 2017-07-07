@@ -13,6 +13,7 @@ import org.eclipse.ui.PlatformUI;
 import it.extraweb.packagedecorator.activator.Activator;
 import it.extraweb.packagedecorator.dto.Preference;
 import it.extraweb.packagedecorator.dto.Preferences;
+import it.extraweb.packagedecorator.util.MaterialColorPalette;
 import it.extraweb.packagedecorator.util.PackageDecoratorConstants;
 
 public class PreferenceManager {
@@ -20,13 +21,13 @@ public class PreferenceManager {
 
 	public static Preferences generateDefaultPreferences() {
 		Preferences toReturn=new Preferences();
-		toReturn.add(new Preference("service", "GREEN_500", true));
-		toReturn.add(new Preference("business", "ORANGE_500", true));
-		toReturn.add(new Preference("integration", "LIGHTBLUE_500", true));
-		toReturn.add(new Preference("dto", "YELLOW_500", true));
-		toReturn.add(new Preference("exception", "RED_500", true));
-		toReturn.add(new Preference("client", "PURPLE_500", true));
-		toReturn.add(new Preference("test", "BLUE_500", true));
+		toReturn.add(new Preference("service", MaterialColorPalette.getInstance().getNameToHex().get("Green 500"), true));
+		toReturn.add(new Preference("business", MaterialColorPalette.getInstance().getNameToHex().get("Orange 500"), true));
+		toReturn.add(new Preference("integration", MaterialColorPalette.getInstance().getNameToHex().get("Light Blue 500"), true));
+		toReturn.add(new Preference("dto",MaterialColorPalette.getInstance().getNameToHex().get("Yellow 500"), true));
+		toReturn.add(new Preference("exception",MaterialColorPalette.getInstance().getNameToHex().get("Red 500"), true));
+		toReturn.add(new Preference("client",MaterialColorPalette.getInstance().getNameToHex().get("Purple 500"), true));
+		toReturn.add(new Preference("test", MaterialColorPalette.getInstance().getNameToHex().get("Blue 500"), true));
 		return toReturn;
 	}
 
