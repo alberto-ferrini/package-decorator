@@ -55,7 +55,6 @@ implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 	private Composite form;
 	private TableCombo combo;
 	private Button checkSub;
-	private Button checkEmpty;
 	private Button buttonAdd;
 	private Button buttonRemove;
 	private Button buttonMoveUp;
@@ -84,8 +83,8 @@ implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 		table.setLayout(new TableLayout());
 		table.setHeaderVisible(true);
 		table.addSelectionListener(this);
-		String[] titles = {"Package name", "Color", "Sub", "Empty"};
-		int[] alignments={SWT.RIGHT,SWT.LEFT,SWT.CENTER,SWT.CENTER};
+		String[] titles = {"Package name", "Color", "Sub"};
+		int[] alignments={SWT.RIGHT,SWT.LEFT,SWT.CENTER};
 		boolean[] resizables={true,false,false,false};
 
 		for (int loopIndex = 0; loopIndex < titles.length; loopIndex++) {
@@ -163,13 +162,6 @@ implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 		checkSub.setSelection(true);
 		checkSub.addSelectionListener(this);
 
-		new Label(form,SWT.LEFT);
-
-		checkEmpty=new Button(form, SWT.CHECK);
-		checkEmpty.setText("Decorate empty packages");
-		checkEmpty.setSelection(true);
-		checkEmpty.addSelectionListener(this);
-		
 		new Label(panel,SWT.LEFT);
 
 		GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(form);
@@ -224,7 +216,6 @@ implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 			textPackage.setText(preference.getPackageName());
 			combo.select(MaterialColorPalette.getInstance().getIndexMap().get(preference.getColor()));
 			checkSub.setSelection(preference.getSubPackages());
-			checkEmpty.setSelection(preference.getEmptyPackages());
 			form.setVisible(true);
 		}
 		else if(e.getSource()==combo){
@@ -246,17 +237,6 @@ implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 				item.setImage(2,new Image(table.getDisplay(), new ImageData(this.getClass().getResourceAsStream("/icons/disabled.png"))));
 			}
 		}
-		else if(e.getSource()==checkEmpty){
-			Preference preference=preferences.get(table.getSelectionIndex());
-			preference.setEmptyPackages(checkEmpty.getSelection());
-			TableItem item=table.getSelection()[0];
-			if(preference.getEmptyPackages()){
-				item.setImage(3,new Image(table.getDisplay(), new ImageData(this.getClass().getResourceAsStream("/icons/enabled.png"))));
-			}
-			else{
-				item.setImage(3,new Image(table.getDisplay(), new ImageData(this.getClass().getResourceAsStream("/icons/disabled.png"))));
-			}
-		}
 		else if(e.getSource()==buttonAdd){
 			TableItem item=new TableItem(table, SWT.LEAD);
 			item.setText(0,"(new)");
@@ -264,7 +244,7 @@ implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 			item.setText(1,PackageDecoratorUtils.decodeColorName(MaterialColorPalette.DEFAULT_COLOR));
 			item.setImage(2,new Image(table.getDisplay(), new ImageData(this.getClass().getResourceAsStream("/icons/enabled.png"))));
 			item.setImage(3,new Image(table.getDisplay(), new ImageData(this.getClass().getResourceAsStream("/icons/disabled.png"))));
-			preferences.add(new Preference("(new)", MaterialColorPalette.DEFAULT_COLOR, true, false));
+			preferences.add(new Preference("(new)", MaterialColorPalette.DEFAULT_COLOR, true));
 		}
 		else if(e.getSource()==buttonRemove){
 			int index=table.getSelectionIndex();
@@ -324,12 +304,6 @@ implements IWorkbenchPreferencePage, SelectionListener, ModifyListener {
 			}
 			else{
 				item.setImage(2,new Image(table.getDisplay(), new ImageData(this.getClass().getResourceAsStream("/icons/disabled.png"))));
-			}
-			if(preference.getEmptyPackages()){
-				item.setImage(3,new Image(table.getDisplay(), new ImageData(this.getClass().getResourceAsStream("/icons/enabled.png"))));
-			}
-			else{
-				item.setImage(3,new Image(table.getDisplay(), new ImageData(this.getClass().getResourceAsStream("/icons/disabled.png"))));
 			}
 		}
 	}

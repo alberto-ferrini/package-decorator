@@ -5,18 +5,16 @@ public class Preference extends PackageDecoratorDto{
 	private String packageName;
 	private String color;
 	private Boolean subPackages;
-	private Boolean emptyPackages;
 	
 	public Preference(){
 		super();
 	}
 	
-	public Preference(String packageName, String color, Boolean subPackages, Boolean emptyPackages) {
+	public Preference(String packageName, String color, Boolean subPackages) {
 		super();
 		this.packageName = packageName;
 		this.color = color;
 		this.subPackages = subPackages;
-		this.emptyPackages = emptyPackages;
 	}
 	
 	public String getPackageName() {
@@ -37,16 +35,9 @@ public class Preference extends PackageDecoratorDto{
 	public void setSubPackages(Boolean subPackages) {
 		this.subPackages = subPackages;
 	}
-	public Boolean getEmptyPackages() {
-		return emptyPackages;
-	}
-	public void setEmptyPackages(Boolean emptyPackages) {
-		this.emptyPackages = emptyPackages;
-	}
 
 	@Override
 	public String toString() {
-		return "Preference [packageName=" + packageName + ", color=" + color + ", subPackages=" + subPackages
-				+ ", emptyPackages=" + emptyPackages + "]";
+		return "Preference [packageName=" + packageName + ", color=" + color + ", subPackages=" + subPackages + "]";
 	}
 }

@@ -20,13 +20,13 @@ public class PreferenceManager {
 
 	public static Preferences generateDefaultPreferences() {
 		Preferences toReturn=new Preferences();
-		toReturn.add(new Preference("service", "GREEN_500", true, false));
-		toReturn.add(new Preference("business", "ORANGE_500", true, false));
-		toReturn.add(new Preference("integration", "LIGHTBLUE_500", true, false));
-		toReturn.add(new Preference("dto", "YELLOW_500", true, false));
-		toReturn.add(new Preference("exception", "RED_500", true, false));
-		toReturn.add(new Preference("client", "PURPLE_500", true, false));
-		toReturn.add(new Preference("test", "BLUE_500", true, false));
+		toReturn.add(new Preference("service", "GREEN_500", true));
+		toReturn.add(new Preference("business", "ORANGE_500", true));
+		toReturn.add(new Preference("integration", "LIGHTBLUE_500", true));
+		toReturn.add(new Preference("dto", "YELLOW_500", true));
+		toReturn.add(new Preference("exception", "RED_500", true));
+		toReturn.add(new Preference("client", "PURPLE_500", true));
+		toReturn.add(new Preference("test", "BLUE_500", true));
 		return toReturn;
 	}
 
