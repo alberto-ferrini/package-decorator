@@ -1,4 +1,4 @@
-package it.extraweb.packagedecorator.util;
+package it.extraweb.packagedecorator.plugin.util;
 
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.RGB;

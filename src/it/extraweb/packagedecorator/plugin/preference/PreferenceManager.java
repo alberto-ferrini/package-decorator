@@ -1,4 +1,4 @@
-package it.extraweb.packagedecorator.preference;
+package it.extraweb.packagedecorator.plugin.preference;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,11 +10,11 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.PlatformUI;
 
-import it.extraweb.packagedecorator.activator.Activator;
-import it.extraweb.packagedecorator.dto.Preference;
-import it.extraweb.packagedecorator.dto.Preferences;
-import it.extraweb.packagedecorator.util.MaterialColorPalette;
-import it.extraweb.packagedecorator.util.PackageDecoratorConstants;
+import it.extraweb.packagedecorator.plugin.activator.Activator;
+import it.extraweb.packagedecorator.plugin.dto.Preference;
+import it.extraweb.packagedecorator.plugin.dto.Preferences;
+import it.extraweb.packagedecorator.plugin.util.MaterialColorPalette;
+import it.extraweb.packagedecorator.plugin.util.PackageDecoratorConstants;
 
 public class PreferenceManager {
 	private static Preferences preferences;
@@ -70,7 +70,7 @@ public class PreferenceManager {
 		try{
 			Activator.getDefault().getPreferenceStore().setValue(PackageDecoratorConstants.PREFERENCES_NAME,encodePreferences(preferences));
 			PreferenceManager.preferences=preferences;
-			PlatformUI.getWorkbench().getDecoratorManager().update("package-decorator.decorator");
+			PlatformUI.getWorkbench().getDecoratorManager().update(Activator.DECORATOR_ID);
 		}catch(Exception e){
 			Activator.getDefault().getLog().log(new Status(IStatus.ERROR,Activator.PLUGIN_ID , e.getLocalizedMessage(),e));
 		}

@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Package Decorator
-Bundle-SymbolicName: package-decorator;singleton:=true
+Bundle-Name: Package Decorator Plugin
+Bundle-SymbolicName: it.extraweb.packagedecorator.plugin;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: it.extraweb.packagedecorator.activator.Activator
+Bundle-Activator: it.extraweb.packagedecorator.plugin.activator.Activator
 Bundle-Vendor: Alberto Ferrini
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

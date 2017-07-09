@@ -1,4 +1,4 @@
-package it.extraweb.packagedecorator.dto;
+package it.extraweb.packagedecorator.plugin.dto;
 
 import java.util.ArrayList;
 import java.util.List;

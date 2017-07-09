@@ -1,10 +1,10 @@
-package it.extraweb.packagedecorator.preference;
+package it.extraweb.packagedecorator.plugin.preference;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import it.extraweb.packagedecorator.activator.Activator;
-import it.extraweb.packagedecorator.util.PackageDecoratorConstants;
+import it.extraweb.packagedecorator.plugin.activator.Activator;
+import it.extraweb.packagedecorator.plugin.util.PackageDecoratorConstants;
 
 /**
  * Class used to initialize default preference values.

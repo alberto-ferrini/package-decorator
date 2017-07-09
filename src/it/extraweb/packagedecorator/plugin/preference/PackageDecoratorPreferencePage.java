@@ -1,4 +1,4 @@
-package it.extraweb.packagedecorator.preference;
+package it.extraweb.packagedecorator.plugin.preference;
 
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.preference.PreferencePage;
@@ -25,10 +25,10 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import it.extraweb.packagedecorator.dto.Preference;
-import it.extraweb.packagedecorator.dto.Preferences;
-import it.extraweb.packagedecorator.util.MaterialColorPalette;
-import it.extraweb.packagedecorator.util.PackageDecoratorUtils;
+import it.extraweb.packagedecorator.plugin.dto.Preference;
+import it.extraweb.packagedecorator.plugin.dto.Preferences;
+import it.extraweb.packagedecorator.plugin.util.MaterialColorPalette;
+import it.extraweb.packagedecorator.plugin.util.PackageDecoratorUtils;
 
 /**
  * This class represents a preference page that

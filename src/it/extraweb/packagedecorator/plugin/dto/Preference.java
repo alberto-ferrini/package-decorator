@@ -1,4 +1,4 @@
-package it.extraweb.packagedecorator.dto;
+package it.extraweb.packagedecorator.plugin.dto;
 
 public class Preference extends PackageDecoratorDto{
 	private static final long serialVersionUID = -6617837485927764136L;

@@ -1,4 +1,4 @@
-package it.extraweb.packagedecorator.util;
+package it.extraweb.packagedecorator.plugin.util;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

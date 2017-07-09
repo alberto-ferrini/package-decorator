@@ -1,4 +1,4 @@
-package it.extraweb.packagedecorator.activator;
+package it.extraweb.packagedecorator.plugin.activator;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -10,7 +10,8 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "package-decorator"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "it.extraweb.packagedecorator.plugin"; 	//$NON-NLS-1$
+	public static final String DECORATOR_ID = "it.extraweb.packagedecorator.plugin.decorator.PackageDecorator";
 
 	// The shared instance
 	private static Activator plugin;

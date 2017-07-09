@@ -1,4 +1,4 @@
-package it.extraweb.packagedecorator.decorator;
+package it.extraweb.packagedecorator.plugin.decorator;
 
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
@@ -10,11 +10,11 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 
-import it.extraweb.packagedecorator.activator.Activator;
-import it.extraweb.packagedecorator.dto.Preference;
-import it.extraweb.packagedecorator.dto.Preferences;
-import it.extraweb.packagedecorator.preference.PreferenceManager;
-import it.extraweb.packagedecorator.util.PackageDecoratorUtils;
+import it.extraweb.packagedecorator.plugin.activator.Activator;
+import it.extraweb.packagedecorator.plugin.dto.Preference;
+import it.extraweb.packagedecorator.plugin.dto.Preferences;
+import it.extraweb.packagedecorator.plugin.preference.PreferenceManager;
+import it.extraweb.packagedecorator.plugin.util.PackageDecoratorUtils;
 
 public class PackageDecorator extends LabelProvider implements ILabelDecorator{
 

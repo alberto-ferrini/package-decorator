@@ -6,8 +6,8 @@
          point="org.eclipse.ui.decorators">
       <decorator
             adaptable="true"
-            class="it.extraweb.packagedecorator.decorator.PackageDecorator"
-            id="package-decorator.decorator"
+            class="it.extraweb.packagedecorator.plugin.decorator.PackageDecorator"
+            id="it.extraweb.packagedecorator.plugin.decorator.PackageDecorator"
             label="Package Decorator"
             lightweight="false"
             location="REPLACE"
@@ -26,14 +26,14 @@
          point="org.eclipse.ui.preferencePages">
       <page
             name="Package Decorator"
-            class="it.extraweb.packagedecorator.preference.PackageDecoratorPreferencePage"
-            id="it.extraweb.packagedecorator.preference.PackageDecoratorPreferencePage">
+            class="it.extraweb.packagedecorator.plugin.preference.PackageDecoratorPreferencePage"
+            id="it.extraweb.packagedecorator.plugin.preference.PackageDecoratorPreferencePage">
       </page>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="it.extraweb.packagedecorator.preference.PreferenceInitializer">
+            class="it.extraweb.packagedecorator.plugin.preference.PreferenceInitializer">
       </initializer>
    </extension>
 
