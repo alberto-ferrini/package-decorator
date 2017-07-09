@@ -13,7 +13,7 @@
             location="REPLACE"
             state="true">
         <description>
-        	Displays a colored icon package, based on package name.
+        	Displays a colored package icon, based on package name.
         </description>
          <enablement>
            <objectClass
