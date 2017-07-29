@@ -1,9 +1,15 @@
 package it.extraweb.packagedecorator.plugin.util;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.RGB;
 
 public class PackageDecoratorUtils {
+	private static byte[] imgData;
+
 	public static ImageData colorize(ImageData current, ImageData template , String colorHex){
 		return colorize(current,template, PackageDecoratorUtils.hex2Rgb(colorHex));
 	}
@@ -42,7 +48,29 @@ public class PackageDecoratorUtils {
 	}
 
 	public static ImageData getPackageIcon(){
-		return new ImageData(PackageDecoratorUtils.class.getResourceAsStream("/icons/package_default.png"));
+		ImageData toReturn=null;
+		try {
+			if(imgData==null) {
+				InputStream is = PackageDecoratorUtils.class.getResourceAsStream("/icons/package_default.png");
+				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+				int nRead;
+				byte[] readedData = new byte[4096];
+
+				while ((nRead = is.read(readedData, 0, readedData.length)) != -1) {
+					outputStream.write(readedData, 0, nRead);
+				}
+				outputStream.flush();
+				imgData=outputStream.toByteArray();
+				outputStream.close();
+				is.close();
+			}
+			ByteArrayInputStream inputStream=new ByteArrayInputStream(imgData);
+			toReturn=new ImageData(inputStream);
+			inputStream.close();
+		}catch(Exception e) {
+			throw new RuntimeException("Exception in getPackageIcon",e);
+		}
+		return toReturn;
 	}
 
 	public static ImageData getPackageWhiteIcon(){
